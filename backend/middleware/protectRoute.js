@@ -1,17 +1,19 @@
 import User from "../models/user.model.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+
 export const protectRoute = async (req, res, next) => {
 	try {
-		
-		const token = req.headers.authorization.split(" ")[1];
-		
-		
+		console.log("Request cookies:", req.cookies); // Log cookies for debugging
+		const token = req.cookies.jwt;
 		if (!token) {
-			console.log(req.headers.authorization)
 			return res.status(401).json({ error: "Unauthorized: No Token Provided" });
 		}
 
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		const tokenParts = token.split(' ');
+		if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+			return res.status(401).json({ error: "Unauthorized: Invalid Token Format" });
+		}
+		const decoded = jwt.verify(tokenParts[1], process.env.JWT_SECRET);
 
 		if (!decoded) {
 			return res.status(401).json({ error: "Unauthorized: Invalid Token" });
@@ -25,9 +27,8 @@ export const protectRoute = async (req, res, next) => {
 
 		req.user = user;
 		next();
-	} catch (error) {
-		//console.log(req.headers.authorization)
-		console.log("Error in protectRoute middleware", error.message);
+	} catch (err) {
+		console.log("Error in protectRoute middleware:", err.message);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
-}
+};

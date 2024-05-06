@@ -1,13 +1,13 @@
 import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
-
+import jwt from "jsonwebtoken"
 export const protectRoute = async (req, res, next) => {
 	try {
-		const token = req.cookies.jwt;
-		//req.cookies.user
-		//const authorization = req.headers.authorization;
-		//const token = authorization.split('Bearer ')[1];
+		
+		const token = req.headers.authorization.split(" ")[1];
+		
+		
 		if (!token) {
+			console.log(req.headers.authorization)
 			return res.status(401).json({ error: "Unauthorized: No Token Provided" });
 		}
 
@@ -26,7 +26,8 @@ export const protectRoute = async (req, res, next) => {
 		req.user = user;
 		next();
 	} catch (error) {
+		//console.log(req.headers.authorization)
 		console.log("Error in protectRoute middleware", error.message);
 		return res.status(500).json({ error: "Internal Server Error" });
 	}
-};
+}

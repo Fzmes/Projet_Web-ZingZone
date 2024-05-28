@@ -38,11 +38,11 @@ const EditProfileModal = ({ authUser }) => {
 				className='btn btn-outline rounded-full btn-sm'
 				onClick={() => document.getElementById("edit_profile_modal").showModal()}
 			>
-				Edit profile
+				Éditer le profil
 			</button>
 			<dialog id='edit_profile_modal' className='modal'>
 				<div className='modal-box border rounded-md border-gray-700 shadow-md'>
-					<h3 className='font-bold text-lg my-3'>Update Profile</h3>
+					<h3 className='font-bold text-lg my-3'>Éditer mon profil</h3>
 					<form
 						className='flex flex-col gap-4'
 						onSubmit={(e) => {
@@ -53,7 +53,7 @@ const EditProfileModal = ({ authUser }) => {
 						<div className='flex flex-wrap gap-2'>
 							<input
 								type='text'
-								placeholder='Full Name'
+								placeholder='Nom Complet'
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.fullName}
 								name='fullName'
@@ -61,7 +61,7 @@ const EditProfileModal = ({ authUser }) => {
 							/>
 							<input
 								type='text'
-								placeholder='Username'
+								placeholder="Nom d'utilisateur"								
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.username}
 								name='username'
@@ -88,7 +88,7 @@ const EditProfileModal = ({ authUser }) => {
 						<div className='flex flex-wrap gap-2'>
 							<input
 								type='password'
-								placeholder='Current Password'
+								placeholder='Mot de Passe Actuel'
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.currentPassword}
 								name='currentPassword'
@@ -96,7 +96,7 @@ const EditProfileModal = ({ authUser }) => {
 							/>
 							<input
 								type='password'
-								placeholder='New Password'
+								placeholder='Nouveau Mot de Passe'
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.newPassword}
 								name='newPassword'
@@ -105,19 +105,19 @@ const EditProfileModal = ({ authUser }) => {
 						</div>
 						<input
 							type='text'
-							placeholder='Link'
+							placeholder='Lien'
 							className='flex-1 input border border-gray-700 rounded p-2 input-md'
 							value={formData.link}
 							name='link'
 							onChange={handleInputChange}
 						/>
 						<button className='btn btn-primary rounded-full btn-sm text-white'>
-							{isUpdatingProfile ? "Updating..." : "Update"}
+							{isUpdatingProfile ? "Enregistrement..." : "Enregistrer"}
 						</button>
 					</form>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
-					<button className='outline-none'>close</button>
+					<button className='outline-none'>Fermer</button>
 				</form>
 			</dialog>
 		</>

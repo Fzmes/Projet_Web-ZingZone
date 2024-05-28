@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import XSvg from "../../../components/svgs/X";
+import Logo from "../../../components/svgs/Zlogo";
 
 import { MdOutlineMail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -30,18 +30,19 @@ const SignUpPage = () => {
 					},
 					body: JSON.stringify({ email, username, fullName, password }),
 				});
-				if (!res.ok) throw new Error("Something went wrong");
+				// if (!res.ok) throw new Error("Quelque chose s'est mal passé");
 				const data = await res.json();
-				if (!res.ok) throw new Error(data.error || "Failed to create account");
+				if (!res.ok) throw new Error(data.error || "Échec de la création du compte");
 				console.log(data);
 				return data;
 			} catch (error) {
 				console.error(error);
-				throw error;
+				toast.error(error.message);
+				// throw error;
 			}
 		},
 		onSuccess: () => {
-			toast.success("Account created successfully");
+			toast.success("Compte créé avec succès");
 
 			{
 				/* Added this line below, after recording the video. I forgot to add this while recording, sorry, thx. */
@@ -62,12 +63,12 @@ const SignUpPage = () => {
 	return (
 		<div className='max-w-screen-xl mx-auto flex h-screen px-10'>
 			<div className='flex-1 hidden lg:flex items-center  justify-center'>
-				<XSvg className='lg:w-2/3 fill-white' />
+				<Logo className='lg:w-2/3 fill-white' />
 			</div>
 			<div className='flex-1 flex flex-col justify-center items-center'>
 				<form className='lg:w-2/3  mx-auto md:mx-20 flex gap-4 flex-col' onSubmit={handleSubmit}>
-					<XSvg className='w-24 lg:hidden fill-white' />
-					<h1 className='text-4xl font-extrabold text-white'>Join today.</h1>
+					<Logo className='w-24 lg:hidden fill-white' />
+					<h1 className='text-4xl font-extrabold text-white'>Joignez-Nous aujourd'hui.</h1>
 					<label className='input input-bordered rounded flex items-center gap-2'>
 						<MdOutlineMail />
 						<input
@@ -85,7 +86,7 @@ const SignUpPage = () => {
 							<input
 								type='text'
 								className='grow '
-								placeholder='Username'
+								placeholder="Nom d'utilisateur"
 								name='username'
 								onChange={handleInputChange}
 								value={formData.username}
@@ -96,7 +97,7 @@ const SignUpPage = () => {
 							<input
 								type='text'
 								className='grow'
-								placeholder='Full Name'
+								placeholder='Nom Complet'
 								name='fullName'
 								onChange={handleInputChange}
 								value={formData.fullName}
@@ -108,21 +109,21 @@ const SignUpPage = () => {
 						<input
 							type='password'
 							className='grow'
-							placeholder='Password'
+							placeholder='Mot de Passe'
 							name='password'
 							onChange={handleInputChange}
 							value={formData.password}
 						/>
 					</label>
-					<button className='btn rounded-full btn-primary text-white'>
-						{isPending ? "Loading..." : "Sign up"}
+					<button className='orange btn rounded-full btn-primary text-white'>
+						{isPending ? "Chargement..." : "S'inscrire"}
 					</button>
 					{isError && <p className='text-red-500'>{error.message}</p>}
 				</form>
 				<div className='flex flex-col lg:w-2/3 gap-2 mt-4'>
-					<p className='text-white text-lg'>Already have an account?</p>
+					<p className='text-white text-lg'>Vous avez déjà un compte?</p>
 					<Link to='/login'>
-						<button className='btn rounded-full btn-primary text-white btn-outline w-full'>Sign in</button>
+						<button className='orange btn rounded-full btn-primary text-white btn-outline w-full'>S'inscrire</button>
 					</Link>
 				</div>
 			</div>

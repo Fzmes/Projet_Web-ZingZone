@@ -5,7 +5,6 @@ import Posts from "../../components/common/Posts";
 import ProfileHeaderSkeleton from "../../components/skeletons/ProfileHeaderSkeleton";
 import EditProfileModal from "./EditProfileModal";
 
-import { POSTS } from "../../utils/db/dummy";
 
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -42,7 +41,7 @@ const ProfilePage = () => {
 				const res = await fetch(`/api/users/profile/${username}`);
 				const data = await res.json();
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 				return data;
 			} catch (error) {
@@ -78,7 +77,7 @@ const ProfilePage = () => {
 			<div className='flex-[4_4_0]  border-r border-gray-700 min-h-screen '>
 				{/* HEADER */}
 				{(isLoading || isRefetching) && <ProfileHeaderSkeleton />}
-				{!isLoading && !isRefetching && !user && <p className='text-center text-lg mt-4'>User not found</p>}
+				{!isLoading && !isRefetching && !user && <p className='text-center text-lg mt-4'>Utilisateur non trouvé</p>}
 				<div className='flex flex-col'>
 					{!isLoading && !isRefetching && user && (
 						<>
@@ -143,9 +142,9 @@ const ProfilePage = () => {
 										className='btn btn-outline rounded-full btn-sm'
 										onClick={() => follow(user?._id)}
 									>
-										{isPending && "Loading..."}
-										{!isPending && amIFollowing && "Unfollow"}
-										{!isPending && !amIFollowing && "Follow"}
+										{isPending && "Chargement..."}
+										{!isPending && amIFollowing && "Se désabonner"}
+										{!isPending && !amIFollowing && "Suivre"}
 									</button>
 								)}
 								{(coverImg || profileImg) && (
@@ -194,11 +193,11 @@ const ProfilePage = () => {
 								<div className='flex gap-2'>
 									<div className='flex gap-1 items-center'>
 										<span className='font-bold text-xs'>{user?.following.length}</span>
-										<span className='text-slate-500 text-xs'>Following</span>
+										<span className='text-slate-500 text-xs'>Abonnements</span>
 									</div>
 									<div className='flex gap-1 items-center'>
 										<span className='font-bold text-xs'>{user?.followers.length}</span>
-										<span className='text-slate-500 text-xs'>Followers</span>
+										<span className='text-slate-500 text-xs'>Abonnés</span>
 									</div>
 								</div>
 							</div>
@@ -214,10 +213,10 @@ const ProfilePage = () => {
 								</div>
 								<div
 									className='flex justify-center flex-1 p-3 text-slate-500 hover:bg-secondary transition duration-300 relative cursor-pointer'
-									onClick={() => setFeedType("likes")}
+									onClick={() => setFeedType("J'aime")}
 								>
-									Likes
-									{feedType === "likes" && (
+									J'aime
+									{feedType === "J'aime" && (
 										<div className='absolute bottom-0 w-10  h-1 rounded-full bg-primary' />
 									)}
 								</div>

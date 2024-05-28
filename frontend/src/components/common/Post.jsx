@@ -31,7 +31,7 @@ const Post = ({ post }) => {
 				const data = await res.json();
 
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 				return data;
 			} catch (error) {
@@ -39,7 +39,7 @@ const Post = ({ post }) => {
 			}
 		},
 		onSuccess: () => {
-			toast.success("Post deleted successfully");
+			toast.success("Message supprimé avec succès");
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
 		},
 	});
@@ -52,7 +52,7 @@ const Post = ({ post }) => {
 				});
 				const data = await res.json();
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 				return data;
 			} catch (error) {
@@ -91,7 +91,7 @@ const Post = ({ post }) => {
 				const data = await res.json();
 
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 				return data;
 			} catch (error) {
@@ -99,7 +99,7 @@ const Post = ({ post }) => {
 			}
 		},
 		onSuccess: () => {
-			toast.success("Comment posted successfully");
+			toast.success("Commentaire posté avec succès");
 			setComment("");
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
 		},
@@ -179,7 +179,7 @@ const Post = ({ post }) => {
 									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>
 										{post.comments.length === 0 && (
 											<p className='text-sm text-slate-500'>
-												No comments yet 🤔 Be the first one 😉
+												Pas encore de commentaires 🤔 Soyez le premier 😉
 											</p>
 										)}
 										{post.comments.map((comment) => (
@@ -209,17 +209,17 @@ const Post = ({ post }) => {
 									>
 										<textarea
 											className='textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800'
-											placeholder='Add a comment...'
+											placeholder='Ajouter un commentaire..'
 											value={comment}
 											onChange={(e) => setComment(e.target.value)}
 										/>
 										<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
-											{isCommenting ? <LoadingSpinner size='md' /> : "Post"}
+											{isCommenting ? <LoadingSpinner size='md' /> : "Poster"}
 										</button>
 									</form>
 								</div>
 								<form method='dialog' className='modal-backdrop'>
-									<button className='outline-none'>close</button>
+									<button className='outline-none'>fermer</button>
 								</form>
 							</dialog>
 							<div className='flex gap-1 items-center group cursor-pointer'>

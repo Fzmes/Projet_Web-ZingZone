@@ -30,7 +30,7 @@ const CreatePost = () => {
 				});
 				const data = await res.json();
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 				return data;
 			} catch (error) {
@@ -41,7 +41,7 @@ const CreatePost = () => {
 		onSuccess: () => {
 			setText("");
 			setImg(null);
-			toast.success("Post created successfully");
+			toast.success("Post créé avec succès");
 			queryClient.invalidateQueries({ queryKey: ["posts"] });
 		},
 	});
@@ -72,7 +72,7 @@ const CreatePost = () => {
 			<form className='flex flex-col gap-2 w-full' onSubmit={handleSubmit}>
 				<textarea
 					className='textarea w-full p-0 text-lg resize-none border-none focus:outline-none  border-gray-800'
-					placeholder='What is happening?!'
+					placeholder='Quoi de neuf?!'
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 				/>
@@ -99,7 +99,7 @@ const CreatePost = () => {
 					</div>
 					<input type='file' accept='image/*' hidden ref={imgRef} onChange={handleImgChange} />
 					<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
-						{isPending ? "Posting..." : "Post"}
+						{isPending ? "Posting..." : "Poster"}
 					</button>
 				</div>
 				{isError && <div className='text-red-500'>{error.message}</div>}
@@ -107,4 +107,4 @@ const CreatePost = () => {
 		</div>
 	);
 };
-export default CreatePost;
+export default CreatePost

@@ -16,7 +16,7 @@ const NotificationPage = () => {
 			try {
 				const res = await fetch("/api/notifications");
 				const data = await res.json();
-				if (!res.ok) throw new Error(data.error || "Something went wrong");
+				if (!res.ok) throw new Error(data.error || "Quelque chose s'est mal passé");
 				return data;
 			} catch (error) {
 				throw new Error(error);
@@ -32,7 +32,7 @@ const NotificationPage = () => {
 				});
 				const data = await res.json();
 
-				if (!res.ok) throw new Error(data.error || "Something went wrong");
+				if (!res.ok) throw new Error(data.error || "Quelque chose s'est mal passé");
 				return data;
 			} catch (error) {
 				throw new Error(error);
@@ -61,7 +61,7 @@ const NotificationPage = () => {
 							className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'
 						>
 							<li>
-								<a onClick={deleteNotifications}>Delete all notifications</a>
+								<a onClick={deleteNotifications}>Supprimer toutes les notifications</a>
 							</li>
 						</ul>
 					</div>
@@ -71,7 +71,7 @@ const NotificationPage = () => {
 						<LoadingSpinner size='lg' />
 					</div>
 				)}
-				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>No notifications 🤔</div>}
+				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>Pas de notifications 🤔</div>}
 				{notifications?.map((notification) => (
 					<div className='border-b border-gray-700' key={notification._id}>
 						<div className='flex gap-2 p-4'>
@@ -85,7 +85,7 @@ const NotificationPage = () => {
 								</div>
 								<div className='flex gap-1'>
 									<span className='font-bold'>@{notification.from.username}</span>{" "}
-									{notification.type === "follow" ? "followed you" : "liked your post"}
+									{notification.type === "follow" ? "t'a suivi" : "a aimé ton post"}
 								</div>
 							</Link>
 						</div>

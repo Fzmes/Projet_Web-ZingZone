@@ -34,7 +34,7 @@ const Posts = ({ feedType, username, userId }) => {
 				const data = await res.json();
 
 				if (!res.ok) {
-					throw new Error(data.error || "Something went wrong");
+					throw new Error(data.error || "Quelque chose s'est mal passé");
 				}
 
 				return data;
@@ -58,7 +58,7 @@ const Posts = ({ feedType, username, userId }) => {
 				</div>
 			)}
 			{!isLoading && !isRefetching && posts?.length === 0 && (
-				<p className='text-center my-4'>No posts in this tab. Switch 👻</p>
+				<p className='text-center my-4'>Aucun Post dans cet onglet. Changer 👻</p>
 			)}
 			{!isLoading && !isRefetching && posts && (
 				<div>

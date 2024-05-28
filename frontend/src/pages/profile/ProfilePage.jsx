@@ -5,6 +5,7 @@ import Posts from "../../components/common/Posts";
 import ProfileHeaderSkeleton from "../../components/skeletons/ProfileHeaderSkeleton";
 import EditProfileModal from "./EditProfileModal";
 
+import { POSTS } from "../../utils/db/dummy";
 
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -156,7 +157,7 @@ const ProfilePage = () => {
 											setCoverImg(null);
 										}}
 									>
-										{isUpdatingProfile ? "Updating..." : "Update"}
+										{isUpdatingProfile ? "Mise à jour..." : "Mettre à jour"}
 									</button>
 								)}
 							</div>
